@@ -147,6 +147,7 @@ export class WhatIfGame {
     }
     for (const [k, v] of Object.entries({ x1: a[0], y1: -a[1], x2: at[0], y2: -at[1], class: cls })) this.aim.setAttribute(k, v);
     this.aim.style.display = 'inline';
+    this.view.tag.style.visibility = 'hidden'; // the aim label takes the carrier tag's place
     if (!label) { this.aimLbl.style.display = 'none'; return; }
     const k = this.view.k, w = label.length * 0.56 + 1.2;
     this.aimText.textContent = label;
@@ -155,7 +156,7 @@ export class WhatIfGame {
     this.aimLbl.setAttribute('transform', `translate(${lx} ${-ly}) scale(${k})`);
     this.aimLbl.style.display = 'inline';
   }
-  hideAim() { this.aim.style.display = this.aimLbl.style.display = 'none'; }
+  hideAim() { this.aim.style.display = this.aimLbl.style.display = 'none'; this.view.tag.style.visibility = ''; }
 
   // ---- simulation
   risk(a, b) { // chance the pass a -> b is picked off, and by whom
