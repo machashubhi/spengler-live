@@ -8,7 +8,7 @@ export class MatchState {
   length(period = this.period) { return period > 3 ? this.otS : PERIOD_S; }
   reset() {
     Object.assign(this, {
-      phase: 'pregame', period: 1, clock: 0, clockT: 0, running: false, periodEndT: null,
+      phase: 'pregame', period: 1, clock: 0, clockT: 0, running: false, stop: null, periodEndT: null,
       score: { H: 0, A: 0 }, periods: [{ H: 0, A: 0 }], xg: { H: 0, A: 0 }, sog: { H: 0, A: 0 },
       strengthType: 'FullStrength', strength: '5v5', homeGoalie: true, awayGoalie: true,
       moments: [], goals: [], events: [], stats: new Map(), rev: 0, battle: null,
@@ -42,7 +42,7 @@ export class MatchState {
     const t = ev.team;
     switch (ev.type) {
       case 'StoppageOfPlay':
-        this.running = false;
+        this.running = false; this.stop = isEnd ? null : ev.why || 'Other'; // why play is stopped, until the next faceoff
         if (isEnd) {
           this.phase = ev.period >= 3 && this.score.H !== this.score.A ? 'final' : 'intermission';
           this.periodEndT = ev.t;
@@ -50,7 +50,7 @@ export class MatchState {
           fx.push({ kind: 'phase' });
         }
         break;
-      case 'Faceoff': case 'PuckControl': this.running = true; break;
+      case 'Faceoff': case 'PuckControl': this.running = true; this.stop = null; break;
       case 'Shot':
         if (!t) break;
         if (ev.res === 'Saved' || ev.res === 'Goal') this.sog[t]++;

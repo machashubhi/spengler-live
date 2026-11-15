@@ -19,6 +19,7 @@ const DELAY = 2500; // draw this far (ms of game time) behind the newest data so
 const INTERMISSION = 17 * 60e3;
 const BREAK = { intermission: 1, final: 1 };
 const why = (w) => String(w || '').replace(/([a-z])([A-Z])/g, '$1 $2');
+const WHISTLE = { Icing: 'Whistle · Icing', Offside: 'Whistle · Offside', Freeze: 'Whistle · Puck frozen', Penalty: 'Whistle · Penalty', Goal: 'Goal · back to centre ice' };
 const TEAM_ATTRS = ['name', 'code', 'short', 'color', 'ink'];
 function shade(hex, k) { // mix #rrggbb with white by k; also report whether the colour is light
   const n = parseInt(hex.slice(1), 16), c = [n >> 16, (n >> 8) & 255, n & 255].map((v) => Math.round(v + (255 - v) * k));
@@ -234,6 +235,9 @@ class SpenglerLiveMatch extends HTMLElement {
           : ph === 'pregame' ? '<b>Puck drop soon</b><span>Waiting for the first event</span>' : '';
       this.overlay(html, 'dim');
     }
+    const w = $('.whistle'), stop = ph === 'live' && !this.goalOn && !this.failed ? st.stop : null;
+    w.hidden = !stop;
+    if (stop && w.dataset.k !== stop) { w.dataset.k = stop; w.innerHTML = `<i></i>${esc(WHISTLE[stop] || 'Whistle · Play stopped')}<small>Faceoff next</small>`; }
     const b = $('.banner');
     b.hidden = !BREAK[ph];
     if (!b.hidden) {

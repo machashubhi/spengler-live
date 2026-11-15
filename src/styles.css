@@ -86,6 +86,9 @@ circle.shot.fx { fill: none; stroke-width: .25; }
 .overlay.good { background: radial-gradient(#0b6b4fd0, #0b6b4f33 75%); } .overlay.meh { background: radial-gradient(#001f3fd8, #001f3f44 75%); } .overlay.bad { background: radial-gradient(#a71418d0, #a7141833 75%); }
 .overlay.good span, .overlay.meh span, .overlay.bad span { color: var(--gold); font-size: clamp(16px, 4cqi, 26px); letter-spacing: .1em; }
 @keyframes pop { from { opacity: 0; transform: scale(1.05); } }
+.whistle { position: absolute; top: 9px; left: 0; right: 0; margin: 0 auto; width: fit-content; max-width: calc(100% - 24px); display: flex; align-items: center; gap: 7px; font-size: 11px; font-weight: 700; padding: 4px 11px 4px 9px; border-radius: 99px; background: #001f3fe6; color: #fff; box-shadow: 0 2px 10px #0004; pointer-events: none; white-space: nowrap; animation: pop .35s ease-out; }
+.whistle i { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); flex: none; }
+.whistle small { font-size: 10px; font-weight: 600; color: var(--accent); }
 .toast { position: absolute; left: 12px; bottom: 12px; max-width: calc(100% - 24px); font-size: 11px; font-weight: 600; padding: 5px 10px; border-radius: 99px; background: #001f3fe6; color: #fff; opacity: 0; transition: opacity .25s; pointer-events: none; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .toast.on { opacity: 1; }
 b.pen { background: var(--gold); color: #1d1300; font-weight: 900; font-size: 9px; padding: 1px 5px; border-radius: 4px; margin-right: 6px; }
@@ -230,6 +233,7 @@ b.pen { background: var(--gold); color: #1d1300; font-weight: 900; font-size: 9p
   .m-list b.pen + span { grid-column: span 2; }
   .m-list button { grid-column: 3 / span 2; justify-self: start; }
   .rink-box { padding: 3px; } .wi-rink { padding: 4px 0 2px; }
+  .whistle { top: 6px; gap: 5px; font-size: 10px; padding: 2px 8px 2px 7px; } .whistle i { width: 5px; height: 5px; } .whistle small { display: none; }
   .legend { gap: 8px; font-size: 10px; }
   .arc-grid { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: 86%; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 6px; }
   .arc { scroll-snap-align: start; }
