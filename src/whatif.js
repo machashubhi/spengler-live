@@ -63,7 +63,8 @@ export class WhatIfGame {
     this.el.count.textContent = `${i + 1} / ${this.scenarios.length}`;
     this.el.you.innerHTML = `<i class="dot ${s.team}"></i>You play ${esc(team.name)}`;
     this.chips();
-    this.el.chips.querySelector(`[data-i="${i}"]`)?.scrollIntoView({ block: 'nearest', inline: 'center', behavior: 'smooth' });
+    const c = this.el.chips, b = c.querySelector(`[data-i="${i}"]`); // centre the chip by scrolling the strip only, never the page
+    if (b) c.scrollTo({ left: c.scrollLeft + b.getBoundingClientRect().left - c.getBoundingClientRect().left - (c.clientWidth - b.offsetWidth) / 2, behavior: 'smooth' });
     this.reset();
   }
   reset() {
