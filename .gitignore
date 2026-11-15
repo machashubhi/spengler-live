@@ -1,0 +1,11 @@
+node_modules/
+.wrangler/
+.dev.vars
+
+# Wisehockey data is licensed to the event: never commit it (raw CSVs, exports, generated match files)
+data/
+*.csv
+*.xlsx
+
+# build output (Cloudflare builds it on deploy)
+public/spengler-live.min.js
