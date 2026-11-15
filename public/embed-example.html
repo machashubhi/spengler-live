@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Embed example</title>
+<style>body { margin: 0; font: 15px/1.5 system-ui, sans-serif; background: #f3f5f8; color: #001f3f; } main { max-width: 900px; margin: 0 auto; padding: 16px; } code { background: #e6ebf1; padding: 1px 5px; border-radius: 4px; }</style>
+</head>
+<body>
+<main>
+  <h1>Your match page</h1>
+  <p>This stands in for a page on another site. The widget comes in through one <code>&lt;iframe&gt;</code>; the short script resizes it to fit.</p>
+  <iframe id="spengler-live" src="/?controls=0&amp;theme=light" title="Live rink" loading="lazy" style="display:block;width:100%;min-height:900px;border:0"></iframe>
+</main>
+<script>
+  addEventListener('message', function (e) {
+    if (e.data && e.data.type === 'spengler-live:height') document.getElementById('spengler-live').style.height = e.data.height + 'px';
+  });
+</script>
+</body>
+</html>

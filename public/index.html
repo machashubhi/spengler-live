@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Spengler Cup · Live Rink</title>
+<meta name="description" content="Live 2D recreation of the match from tracking data, player archetypes, and a What If? game for every goal.">
+<meta name="theme-color" content="#001F3F">
+<link rel="icon" href="data:,">
+<link rel="preload" href="/fonts/montserrat-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<script>
+  // Which match: ?match=<id> (a file you uploaded with `npm run upload -- <id>`), else this default.
+  var MATCH = (new URLSearchParams(location.search).get('match') || '2025-12-31-final').replace(/[^a-z0-9-]/g, '');
+  if (!new URLSearchParams(location.search).has('feed-url')) {
+    var l = document.createElement('link'); l.rel = 'preload'; l.as = 'fetch'; l.crossOrigin = 'anonymous'; l.href = '/data/' + MATCH + '.json';
+    document.head.appendChild(l); // start the data download before the widget script arrives
+  }
+</script>
+<style>
+  @font-face { font-family: Montserrat; src: url(/fonts/montserrat-latin-wght-normal.woff2) format("woff2"); font-weight: 100 900; font-display: swap; }
+  html, body { margin: 0; background: #00152b; }
+  body { padding: 16px; }
+  body.light { background: #f2f5f8; }
+  main { max-width: 960px; margin: 0 auto; }
+  spengler-live-match { display: block; min-height: 900px; }
+  @media (max-width: 520px) { body { padding: 6px; } }
+</style>
+</head>
+<body>
+<main><spengler-live-match id="match" controls></spengler-live-match></main>
+<script>
+  // Every other option is an element attribute and can be set from the URL, e.g.
+  //   ?match=2026-12-29-qf1&home-name=SCL%20Tigers&home-code=SCL&home-color=%23f2a900&away-code=FRO
+  //   ?feed-url=wss://feed.example.com/match/123 (live rows)   ?start=p1-end (or #p1-end)   ?speed=5   ?theme=light   ?controls=0
+  (function () {
+    var q = new URLSearchParams(location.search), m = document.getElementById('match'), h = location.hash.slice(1);
+    var opts = ['speed', 'start', 'theme', 'feed-url', 'autoplay', 'autoscroll', 'competition', 'ot-minutes'];
+    ['home', 'away'].forEach(function (s) { ['name', 'short', 'code', 'color', 'ink'].forEach(function (k) { opts.push(s + '-' + k); }); });
+    opts.forEach(function (k) { if (q.has(k)) m.setAttribute(k, q.get(k)); });
+    if (!q.has('feed-url')) m.setAttribute('src', '/data/' + MATCH + '.json');
+    if (h && !q.has('start')) m.setAttribute('start', h);
+    if (q.get('controls') === '0' || q.has('feed-url')) m.removeAttribute('controls');
+    if (q.get('theme') === 'light') document.body.className = 'light';
+    if (window.parent !== window && window.ResizeObserver) { // framed: tell the host page our height
+      new ResizeObserver(function () { window.parent.postMessage({ type: 'spengler-live:height', height: document.documentElement.scrollHeight }, '*'); }).observe(document.body);
+    }
+  }());
+</script>
+<script src="/spengler-live.min.js" defer></script>
+</body>
+</html>

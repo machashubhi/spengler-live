@@ -1,0 +1,73 @@
+<div class="root" data-phase="pregame">
+  <div class="demo" hidden>
+    <div class="d-row">
+      <b>Replay demo</b>
+      <button type="button" class="d-play">Pause</button>
+      <span class="d-speeds"><button type="button" data-speed="1">1×</button><button type="button" data-speed="5">5×</button><button type="button" data-speed="20">20×</button><button type="button" data-speed="60">60×</button></span>
+      <span class="d-time"></span>
+    </div>
+    <input type="range" aria-label="Match timeline">
+    <div class="d-jumps"></div>
+  </div>
+
+  <div class="banner" hidden><small></small><strong></strong><span></span></div>
+
+  <section class="sec live" aria-label="Live rink">
+    <header class="head"><span class="kick"><i class="dot-live"></i>Live rink</span><span class="comp"></span><span class="pill"></span></header>
+    <div class="rink-box"><div class="overlay" hidden></div><div class="toast"></div></div>
+    <div class="legend">
+      <span><i class="dot H"></i><span class="home-code"></span> attacks →</span>
+      <span class="lg-puck"><i class="dot puck"></i>Puck</span>
+      <span>← <span class="away-code"></span> attacks<i class="dot A"></i></span>
+      <button type="button" class="chipbtn" data-layer aria-pressed="false">Shot map</button>
+    </div>
+    <button type="button" class="wi-new" hidden></button>
+    <div class="board">
+      <div class="team H"><div class="crest"></div><div class="tname"></div></div>
+      <div class="mid">
+        <div class="score" aria-label="Score"><span class="sH">0</span><i>–</i><span class="sA">0</span></div>
+        <div class="clockline"><span class="pill"></span><span class="clock"></span></div>
+        <div class="strength" hidden></div>
+      </div>
+      <div class="team A"><div class="crest"></div><div class="tname"></div></div>
+    </div>
+    <div class="xg"><strong class="xH">0.00</strong><div><small>Expected goals · xG</small><span class="xbar"><i class="H"></i><i class="A"></i></span></div><strong class="xA">0.00</strong></div>
+    <div class="sog"><span class="sogH">0</span><small>Shots on goal</small><span class="sogA">0</span></div>
+    <div class="periods"></div>
+    <div class="moments">
+      <div class="m-head"><strong>Key moments</strong><small>Tap “What if?” to replay a goal your way</small></div>
+      <ol class="m-list"></ol>
+    </div>
+  </section>
+
+  <section class="sec arch" aria-label="Player archetypes">
+    <header class="head"><span class="kick">Beyond the scoreboard</span><span class="comp">Player archetypes · live from tracking data</span></header>
+    <p class="intro">Goals, assists and shots show who finished the play. These three numbers show who won the puck, carried it and stopped it. Tap a player to find him on the rink.</p>
+    <div class="arc-grid"></div>
+  </section>
+
+  <section class="sec whatif" aria-label="What if game">
+    <header class="head"><span class="kick gold">What if?</span><span class="wi-tally"></span><span class="wi-count"></span></header>
+    <div class="wi-locked"><strong>Rewrite the goals.</strong><span>Every goal unlocks here the moment it's scored. You get the puck three passes before the real goal — same players, same positions — and the defence reacts to every pass you make.</span></div>
+    <div class="wi-body" hidden>
+      <h3 class="wi-title"></h3>
+      <p class="wi-sub"></p>
+      <div class="wi-chips" role="tablist" aria-label="Goals scored"></div>
+      <div class="wi-board">
+        <div class="wi-hud"><span class="wi-you"></span><span class="wi-step"></span></div>
+        <div class="rink-box wi-rink"><div class="overlay" hidden></div></div>
+        <div class="wi-hint" aria-live="polite"></div>
+      </div>
+      <div class="wi-actions">
+        <button type="button" class="wi-shoot">Shoot</button>
+        <button type="button" class="wi-real">Watch the real goal</button>
+        <button type="button" class="wi-reset" aria-label="Restart this goal" title="Restart">↺</button>
+      </div>
+      <div class="wi-result" aria-live="polite"></div>
+      <p class="fine">Tap a teammate to pass (the line shows interception risk) or tap the net to shoot. ★ marks where the real shot came from. Arcade physics; shot xG fitted on this game's Wisehockey xG.</p>
+    </div>
+  </section>
+
+  <p class="foot">Recreated from Wisehockey tracking events, a few seconds behind the broadcast · rink geometry from hockey_rink (IIHF)</p>
+  <div class="sr" aria-live="assertive"></div>
+</div>

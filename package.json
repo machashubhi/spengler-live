@@ -1,0 +1,21 @@
+{
+  "name": "spengler-live",
+  "version": "2.0.0",
+  "private": true,
+  "type": "module",
+  "license": "CC-BY-NC-4.0",
+  "description": "Live 2D rink, player archetypes and a What If? goal game, built from Wisehockey tracking events.",
+  "scripts": {
+    "build": "node tools/build.mjs",
+    "standalone": "node tools/build.mjs --standalone",
+    "dev": "npm run build && wrangler dev",
+    "deploy": "npm run build && wrangler deploy",
+    "data": "python3 tools/prepare_data.py",
+    "upload": "node tools/upload.mjs",
+    "data:demo": "python3 tools/prepare_data.py data 2025-12-31-final --competition \"Spengler Cup 2025 \u00b7 Final\" --home-short \"US Collegiate\" --home-code USA --home-color \"#d93a4e\" --away-code HCD --away-color \"#2f7ee6\" --away-ink \"#ffd84d\""
+  },
+  "devDependencies": {
+    "esbuild": "^0.28.2",
+    "wrangler": "^4.162.0"
+  }
+}
